@@ -5,20 +5,21 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, REST.Types, REST.Client,
-  Data.Bind.Components, Data.Bind.ObjectScope, Json, System.Generics.Collections;
+  Data.Bind.Components, Data.Bind.ObjectScope, Json, System.Generics.Collections, uMovie;
 
 type
   TfrmSearch = class(TForm)
     txtSearch: TEdit;
     btnSearch: TButton;
     lstMovies: TListBox;
-    cbxSearch: TComboBox;
     restClient: TRESTClient;
     restRequest: TRESTRequest;
     procedure btnSearchClick(Sender: TObject);
+    procedure lstMoviesDblClick(Sender: TObject);
   private
     { Private declarations }
     procedure findByTitle(title:string);
+    var movies : TObjectList<TMovie>;
   public
     { Public declarations }
   end;
@@ -29,7 +30,7 @@ var
 implementation
 
 {$R *.dfm}
-uses uMovie;
+uses uMovieView;
 
 procedure TfrmSearch.btnSearchClick(Sender: TObject);
 begin
@@ -42,7 +43,7 @@ var
   jArray : TJSONArray;
   jMovies : TJSONArray;
   Value: TJSONValue;
-  movies : TObjectList<TMovie>;
+
   m : TMovie;
 begin
   restRequest.AddParameter('s', title);
@@ -63,6 +64,21 @@ begin
   begin
     lstMovies.Items.Add(m.Title + ' | ' + m.Year);
   end;
+end;
+
+procedure TfrmSearch.lstMoviesDblClick(Sender: TObject);
+var mIndex : integer;
+begin
+  mIndex := lstMovies.ItemIndex;
+  //ShowMessage(movies[lstMovies.ItemIndex].Year);
+  frmMovieView := TfrmMovieView.Create(self);
+  frmMovieView.Setmovie(movies[lstMovies.ItemIndex]);
+
+  frmMovieView.ShowModal;
+
+  //frmMovieView.movie := frmMovieView.movie.Create;
+  //frmMovieView.movie := movies[lstMovies.ItemIndex];
+
 end;
 
 end.

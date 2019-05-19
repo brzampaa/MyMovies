@@ -13,6 +13,8 @@ object frmMovieView: TfrmMovieView
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object imgPoster: TImage
@@ -20,6 +22,8 @@ object frmMovieView: TfrmMovieView
     Top = 6
     Width = 357
     Height = 532
+    Proportional = True
+    Stretch = True
   end
   object lblTitle: TLabel
     Left = 156
@@ -154,7 +158,7 @@ object frmMovieView: TfrmMovieView
     Height = 13
     Caption = 'Ratings'
   end
-  object txtName: TEdit
+  object txtTitle: TEdit
     Left = 9
     Top = 25
     Width = 314
@@ -321,5 +325,22 @@ object frmMovieView: TfrmMovieView
     Lines.Strings = (
       'txtActors')
     TabOrder = 17
+  end
+  object IdHTTP1: TIdHTTP
+    AllowCookies = True
+    ProxyParams.BasicAuthentication = False
+    ProxyParams.ProxyPort = 0
+    Request.ContentLength = -1
+    Request.ContentRangeEnd = -1
+    Request.ContentRangeStart = -1
+    Request.ContentRangeInstanceLength = -1
+    Request.Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    Request.BasicAuthentication = False
+    Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
+    Request.Ranges.Units = 'bytes'
+    Request.Ranges = <>
+    HTTPOptions = [hoForceEncodeParams]
+    Left = 720
+    Top = 480
   end
 end

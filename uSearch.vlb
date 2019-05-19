@@ -1,16 +1,13 @@
 ﻿[txtSearch]
 Coordinates=79,144,69,58
 
-[ListBox1]
-Coordinates=121,10,101,124
-
 []
-Coordinates=259,1,91,36
-
-[cbxSearch]
 Coordinates=10,10,101,124
 Visible=True
 
 [btnSearch]
 Coordinates=10,144,59,58
+
+[lstMovies]
+Coordinates=121,10,101,124
 

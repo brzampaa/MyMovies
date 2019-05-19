@@ -5,20 +5,21 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, REST.Types, REST.Client,
-  Data.Bind.Components, Data.Bind.ObjectScope, Json;
+  Data.Bind.Components, Data.Bind.ObjectScope, Json, System.Generics.Collections, uMovie;
 
 type
   TfrmSearch = class(TForm)
     txtSearch: TEdit;
     btnSearch: TButton;
-    ListBox1: TListBox;
-    cbxSearch: TComboBox;
+    lstMovies: TListBox;
     restClient: TRESTClient;
     restRequest: TRESTRequest;
-    Memo1: TMemo;
     procedure btnSearchClick(Sender: TObject);
+    procedure lstMoviesDblClick(Sender: TObject);
   private
     { Private declarations }
+    procedure findByTitle(title:string);
+    var movies : TObjectList<TMovie>;
   public
     { Public declarations }
   end;
@@ -29,34 +30,53 @@ var
 implementation
 
 {$R *.dfm}
-uses uMovie;
+uses uMovieView;
 
 procedure TfrmSearch.btnSearchClick(Sender: TObject);
-  var
+begin
+  findByTitle(txtSearch.Text);
+end;
+
+procedure TfrmSearch.findByTitle(title: string);
+var
   jObject : TJSONObject;
   jArray : TJSONArray;
   jMovies : TJSONArray;
   Value: TJSONValue;
-  movies : TArray<TMovie>;
+
+  m : TMovie;
 begin
-  restRequest.AddParameter('s', txtSearch.Text);
+  restRequest.AddParameter('s', title);
+  //restRequest.AddParameter('type','episode');
   restRequest.Execute;
+
   jObject := TJSONObject.ParseJSONValue(TEncoding.ASCII.GetBytes(restRequest.Response.JSONValue.ToString), 0) as TJSONObject;
-  //Memo1.Text := restRequest.Response.JSONValue.ToString;
   Value := jObject.Get('Search').JsonValue;
-  //:= jv as TJSONArray;
   jArray:= Value as TJSONArray;
-  //TJSONArray(restRequest.Response.JSONValue);
-  //Value := jArray.GetValue('Search');
+
+  movies :=  TObjectList<TMovie>.Create;
   for Value in jArray do
   begin
-    movies.
+    movies.Add(TMovie.FromJsonString(Value.ToString));
   end;
 
-  //jMovies:= TJSONArray(Value);
-  //ShowMessage(jArray.Items[0].ToString);
-  //Value := jMovies.Get(0);
-  //ShowMessage(Value.ToString);
+  for m in movies do
+  begin
+    lstMovies.Items.Add(m.Title + ' | ' + m.Year);
+  end;
+end;
+
+procedure TfrmSearch.lstMoviesDblClick(Sender: TObject);
+var mIndex : integer;
+begin
+  mIndex := lstMovies.ItemIndex;
+  //ShowMessage(movies[lstMovies.ItemIndex].Year);
+  frmMovieView := TfrmMovieView.Create(self);
+  frmMovieView.Setmovie(movies[lstMovies.ItemIndex]);
+  frmMovieView.ShowModal;
+  //frmMovieView.movie := frmMovieView.movie.Create;
+  //frmMovieView.movie := movies[lstMovies.ItemIndex];
+
 end;
 
 end.

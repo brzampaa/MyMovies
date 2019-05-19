@@ -2,7 +2,7 @@ object frmSearch: TfrmSearch
   Left = 0
   Top = 0
   BorderStyle = bsDialog
-  Caption = 'frmSearch'
+  Caption = 'MyMovies | Find movies'
   ClientHeight = 277
   ClientWidth = 492
   Color = clBtnFace
@@ -17,14 +17,14 @@ object frmSearch: TfrmSearch
   TextHeight = 13
   object txtSearch: TEdit
     Left = 8
-    Top = 8
-    Width = 241
+    Top = 15
+    Width = 392
     Height = 21
     TabOrder = 0
   end
   object btnSearch: TButton
     Left = 406
-    Top = 6
+    Top = 13
     Width = 75
     Height = 25
     Caption = 'Search'
@@ -38,13 +38,7 @@ object frmSearch: TfrmSearch
     Height = 226
     ItemHeight = 13
     TabOrder = 2
-  end
-  object cbxSearch: TComboBox
-    Left = 255
-    Top = 8
-    Width = 145
-    Height = 21
-    TabOrder = 3
+    OnDblClick = lstMoviesDblClick
   end
   object restClient: TRESTClient
     Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
