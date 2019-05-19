@@ -4,7 +4,7 @@ object frmMovieView: TfrmMovieView
   BorderWidth = 1
   Caption = 'My Movies | Find movies'
   ClientHeight = 579
-  ClientWidth = 776
+  ClientWidth = 768
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,6 +13,7 @@ object frmMovieView: TfrmMovieView
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnActivate = FormActivate
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -144,13 +145,6 @@ object frmMovieView: TfrmMovieView
     Height = 13
     Caption = 'DVD Release Date'
   end
-  object lblWebsiteLink: TLabel
-    Left = 516
-    Top = 544
-    Width = 137
-    Height = 13
-    Caption = 'http://www.exemple.com.br'
-  end
   object lblRatings: TLabel
     Left = 180
     Top = 483
@@ -164,7 +158,7 @@ object frmMovieView: TfrmMovieView
     Width = 314
     Height = 21
     Alignment = taCenter
-    Enabled = False
+    ReadOnly = True
     TabOrder = 0
   end
   object txtYear: TEdit
@@ -173,7 +167,7 @@ object frmMovieView: TfrmMovieView
     Width = 60
     Height = 21
     Alignment = taCenter
-    Enabled = False
+    ReadOnly = True
     TabOrder = 1
   end
   object txtRated: TEdit
@@ -182,7 +176,7 @@ object frmMovieView: TfrmMovieView
     Width = 66
     Height = 21
     Alignment = taCenter
-    Enabled = False
+    ReadOnly = True
     TabOrder = 2
   end
   object txtReleaseDate: TEdit
@@ -191,7 +185,7 @@ object frmMovieView: TfrmMovieView
     Width = 81
     Height = 21
     Alignment = taCenter
-    Enabled = False
+    ReadOnly = True
     TabOrder = 3
   end
   object txtRunningTime: TEdit
@@ -200,7 +194,7 @@ object frmMovieView: TfrmMovieView
     Width = 78
     Height = 21
     Alignment = taCenter
-    Enabled = False
+    ReadOnly = True
     TabOrder = 4
   end
   object txtGenre: TEdit
@@ -209,7 +203,7 @@ object frmMovieView: TfrmMovieView
     Width = 225
     Height = 21
     Alignment = taCenter
-    Enabled = False
+    ReadOnly = True
     TabOrder = 5
   end
   object txtDirector: TEdit
@@ -218,7 +212,7 @@ object frmMovieView: TfrmMovieView
     Width = 129
     Height = 21
     Alignment = taCenter
-    Enabled = False
+    ReadOnly = True
     TabOrder = 6
   end
   object txtWriter: TEdit
@@ -227,7 +221,7 @@ object frmMovieView: TfrmMovieView
     Width = 129
     Height = 21
     Alignment = taCenter
-    Enabled = False
+    ReadOnly = True
     TabOrder = 7
   end
   object txtActors: TMemo
@@ -236,9 +230,7 @@ object frmMovieView: TfrmMovieView
     Width = 380
     Height = 44
     Alignment = taCenter
-    Enabled = False
-    Lines.Strings = (
-      'txtActors')
+    ReadOnly = True
     TabOrder = 8
   end
   object txtSynopsis: TMemo
@@ -247,9 +239,8 @@ object frmMovieView: TfrmMovieView
     Width = 381
     Height = 55
     Alignment = taCenter
-    Enabled = False
-    Lines.Strings = (
-      'txtActors')
+    ReadOnly = True
+    ScrollBars = ssVertical
     TabOrder = 9
   end
   object txtLanguage: TEdit
@@ -258,7 +249,7 @@ object frmMovieView: TfrmMovieView
     Width = 179
     Height = 21
     Alignment = taCenter
-    Enabled = False
+    ReadOnly = True
     TabOrder = 10
   end
   object txtCountry: TEdit
@@ -267,7 +258,7 @@ object frmMovieView: TfrmMovieView
     Width = 105
     Height = 21
     Alignment = taCenter
-    Enabled = False
+    ReadOnly = True
     TabOrder = 11
   end
   object txtAwards: TEdit
@@ -276,7 +267,7 @@ object frmMovieView: TfrmMovieView
     Width = 381
     Height = 21
     Alignment = taCenter
-    Enabled = False
+    ReadOnly = True
     TabOrder = 12
   end
   object txtProduction: TEdit
@@ -285,7 +276,7 @@ object frmMovieView: TfrmMovieView
     Width = 380
     Height = 21
     Alignment = taCenter
-    Enabled = False
+    ReadOnly = True
     TabOrder = 13
   end
   object txtImdbRating: TEdit
@@ -294,7 +285,7 @@ object frmMovieView: TfrmMovieView
     Width = 105
     Height = 21
     Alignment = taCenter
-    Enabled = False
+    ReadOnly = True
     TabOrder = 14
   end
   object txtImdbVotes: TEdit
@@ -303,7 +294,7 @@ object frmMovieView: TfrmMovieView
     Width = 134
     Height = 21
     Alignment = taCenter
-    Enabled = False
+    ReadOnly = True
     TabOrder = 15
   end
   object txtDvd: TEdit
@@ -312,7 +303,7 @@ object frmMovieView: TfrmMovieView
     Width = 81
     Height = 21
     Alignment = taCenter
-    Enabled = False
+    ReadOnly = True
     TabOrder = 16
   end
   object txtRatings: TMemo
@@ -321,10 +312,17 @@ object frmMovieView: TfrmMovieView
     Width = 381
     Height = 55
     Alignment = taCenter
-    Enabled = False
-    Lines.Strings = (
-      'txtActors')
+    ReadOnly = True
     TabOrder = 17
+  end
+  object lnkWebsite: TLinkLabel
+    Left = 563
+    Top = 544
+    Width = 43
+    Height = 17
+    Caption = 'Website'
+    TabOrder = 18
+    OnClick = lnkWebsiteClick
   end
   object IdHTTP1: TIdHTTP
     AllowCookies = True

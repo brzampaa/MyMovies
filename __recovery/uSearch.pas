@@ -19,6 +19,7 @@ type
   private
     { Private declarations }
     procedure findByTitle(title:string);
+    procedure findById(id:string);
     var movies : TObjectList<TMovie>;
   public
     { Public declarations }
@@ -34,7 +35,24 @@ uses uMovieView;
 
 procedure TfrmSearch.btnSearchClick(Sender: TObject);
 begin
+  lstMovies.Clear;
   findByTitle(txtSearch.Text);
+end;
+
+procedure TfrmSearch.findById(id: string);
+var
+  m : TMovie;
+begin
+  restRequest.ResetToDefaults;
+  restRequest.AddParameter('i', id);
+  restRequest.AddParameter('plot','full');
+  //ShowMessage(id);
+  restRequest.Execute;
+  //ShowMessage(restRequest.Response.JSONValue.ToString);
+  m := TMovie.FromJsonString(restRequest.Response.JSONValue.ToString);
+  frmMovieView := TfrmMovieView.Create(self);
+  frmMovieView.Setmovie(m);
+  frmMovieView.ShowModal;
 end;
 
 procedure TfrmSearch.findByTitle(title: string);
@@ -63,13 +81,14 @@ begin
   for m in movies do
   begin
     lstMovies.Items.Add(m.Title + ' | ' + m.Year);
+    lstMovies.Items.add
   end;
 end;
 
 procedure TfrmSearch.lstMoviesDblClick(Sender: TObject);
 var mIndex : integer;
 begin
-  mIndex := lstMovies.ItemIndex;
+  {mIndex := lstMovies.ItemIndex;
   //ShowMessage(movies[lstMovies.ItemIndex].Year);
   frmMovieView := TfrmMovieView.Create(self);
   frmMovieView.Setmovie(movies[lstMovies.ItemIndex]);
@@ -77,8 +96,8 @@ begin
   frmMovieView.ShowModal;
 
   //frmMovieView.movie := frmMovieView.movie.Create;
-  //frmMovieView.movie := movies[lstMovies.ItemIndex];
-
+  //frmMovieView.movie := movies[lstMovies.ItemIndex];}
+  findById(movies[lstMovies.ItemIndex].imdbID);
 end;
 
 end.

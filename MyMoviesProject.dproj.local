@@ -2,25 +2,25 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2019/05/17 15:35:22.000.904,=C:\Users\Windows 10\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2019/05/17 16:11:14.000.115,C:\Users\Windows 10\Documents\Embarcadero\Studio\Projects\Unit2.pas=E:\MyMovies\uMain.pas</Transaction>
-    <Transaction>2019/05/17 16:11:14.000.115,C:\Users\Windows 10\Documents\Embarcadero\Studio\Projects\Unit2.dfm=E:\MyMovies\uMain.dfm</Transaction>
-    <Transaction>2019/05/17 16:11:37.000.788,C:\Users\Windows 10\Documents\Embarcadero\Studio\Projects\Project2.dproj=E:\MyMovies\MyMoviesProject.dproj</Transaction>
-    <Transaction>2019/05/19 09:31:04.000.171,=C:\Git\Git\MyMovies\uMovie.pas</Transaction>
+    <Transaction>2019/05/17 16:11:14.000.115,E:\MyMovies\uMain.pas=C:\Users\Windows 10\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2019/05/17 16:11:14.000.115,E:\MyMovies\uMain.dfm=C:\Users\Windows 10\Documents\Embarcadero\Studio\Projects\Unit2.dfm</Transaction>
+    <Transaction>2019/05/17 16:11:37.000.788,E:\MyMovies\MyMoviesProject.dproj=C:\Users\Windows 10\Documents\Embarcadero\Studio\Projects\Project2.dproj</Transaction>
     <Transaction>2019/05/19 09:31:04.000.189,=C:\Git\Git\MyMovies\uRating.pas</Transaction>
+    <Transaction>2019/05/19 09:31:04.000.171,=C:\Git\Git\MyMovies\uMovie.pas</Transaction>
     <Transaction>2019/05/19 09:31:27.000.616,C:\Git\Git\MyMovies\uRating.pas=</Transaction>
     <Transaction>2019/05/19 09:31:29.000.988,C:\Git\Git\MyMovies\uMovie.pas=</Transaction>
     <Transaction>2019/05/19 09:32:09.000.484,=C:\Git\MyMovies\Unit1.pas</Transaction>
-    <Transaction>2019/05/19 09:32:29.000.445,C:\Git\MyMovies\Unit1.pas=C:\Git\MyMovies\uMovie.pas</Transaction>
+    <Transaction>2019/05/19 09:32:29.000.445,C:\Git\MyMovies\uMovie.pas=C:\Git\MyMovies\Unit1.pas</Transaction>
     <Transaction>2019/05/19 09:32:41.000.777,=C:\Git\MyMovies\Unit1.pas</Transaction>
-    <Transaction>2019/05/19 09:32:50.000.328,C:\Git\MyMovies\Unit1.pas=C:\Git\MyMovies\uRating.pas</Transaction>
+    <Transaction>2019/05/19 09:32:50.000.328,C:\Git\MyMovies\uRating.pas=C:\Git\MyMovies\Unit1.pas</Transaction>
     <Transaction>2019/05/19 09:33:04.000.058,=C:\Git\MyMovies\Unit1.pas</Transaction>
-    <Transaction>2019/05/19 09:34:27.000.800,C:\Git\MyMovies\Unit1.dfm=C:\Git\MyMovies\uSearch.dfm</Transaction>
-    <Transaction>2019/05/19 09:34:27.000.800,C:\Git\MyMovies\Unit1.pas=C:\Git\MyMovies\uSearch.pas</Transaction>
-    <Transaction>2019/05/19 10:49:45.420,C:\Git\MyMovies\uMovieView.pas=C:\Git\MyMovies\uSearch.pas</Transaction>
-    <Transaction>2019/05/19 10:49:45.420,C:\Git\MyMovies\uMovieView.dfm=C:\Git\MyMovies\uSearch.dfm</Transaction>
-    <Transaction>2019/05/19 10:50:50.489,=C:\Git\MyMovies\Unit1.pas</Transaction>
-    <Transaction>2019/05/19 10:50:56.807,C:\Git\MyMovies\uSearch.dfm=C:\Git\MyMovies\Unit1.dfm</Transaction>
-    <Transaction>2019/05/19 10:50:56.807,C:\Git\MyMovies\uSearch.pas=C:\Git\MyMovies\Unit1.pas</Transaction>
+    <Transaction>2019/05/19 09:34:27.000.800,C:\Git\MyMovies\uSearch.dfm=C:\Git\MyMovies\Unit1.dfm</Transaction>
+    <Transaction>2019/05/19 09:34:27.000.800,C:\Git\MyMovies\uSearch.pas=C:\Git\MyMovies\Unit1.pas</Transaction>
+    <Transaction>2019/05/19 10:49:45.000.420,C:\Git\MyMovies\uSearch.pas=C:\Git\MyMovies\uMovieView.pas</Transaction>
+    <Transaction>2019/05/19 10:49:45.000.420,C:\Git\MyMovies\uSearch.dfm=C:\Git\MyMovies\uMovieView.dfm</Transaction>
+    <Transaction>2019/05/19 10:50:50.000.489,=C:\Git\MyMovies\Unit1.pas</Transaction>
+    <Transaction>2019/05/19 10:50:56.000.807,C:\Git\MyMovies\Unit1.pas=C:\Git\MyMovies\uSearch.pas</Transaction>
+    <Transaction>2019/05/19 10:50:56.000.807,C:\Git\MyMovies\Unit1.dfm=C:\Git\MyMovies\uSearch.dfm</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="uMain.pas"/>
