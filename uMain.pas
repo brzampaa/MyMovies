@@ -8,13 +8,11 @@ uses
   Vcl.ExtCtrls;
 
 type
-  TForm2 = class(TForm)
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    Image1: TImage;
-    Panel1: TPanel;
-    SpeedButton3: TSpeedButton;
-    SpeedButton4: TSpeedButton;
+  TfrmMain = class(TForm)
+    btnFind: TSpeedButton;
+    btnFav: TSpeedButton;
+    imgMainBkg: TImage;
+    procedure btnFindClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -22,10 +20,18 @@ type
   end;
 
 var
-  Form2: TForm2;
+  frmMain: TfrmMain;
 
 implementation
 
 {$R *.dfm}
+
+uses uSearch;
+
+procedure TfrmMain.btnFindClick(Sender: TObject);
+begin
+  frmSearch := TfrmSearch.Create(self);
+  frmSearch.ShowModal;
+end;
 
 end.

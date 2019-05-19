@@ -94,7 +94,17 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="uMain.pas">
-            <Form>Form2</Form>
+            <Form>frmMain</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uMovie.pas"/>
+        <DCCReference Include="uRating.pas"/>
+        <DCCReference Include="uMovieView.pas">
+            <Form>frmMovieView</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uSearch.pas">
+            <Form>frmSearch</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
@@ -117,6 +127,10 @@
                 <Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReports\LibD26\dclfrx26.bpl">FastReport 6.0 Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReports\LibD26\dclfrxDB26.bpl">FastReport 6.0 DB Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReports\LibD26\dclfrxe26.bpl">FastReport 6.0 Exports</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReports\LibD26\dclfrxtee26.bpl">FastReport 6.0 Tee Components</Excluded_Packages>
                 </Excluded_Packages>
                 <Source>
                     <Source Name="MainSource">MyMoviesProject.dpr</Source>

@@ -1,0 +1,50 @@
+unit uSearch;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, REST.Types, REST.Client,
+  Data.Bind.Components, Data.Bind.ObjectScope, Json;
+
+type
+  TfrmSearch = class(TForm)
+    txtSearch: TEdit;
+    btnSearch: TButton;
+    ListBox1: TListBox;
+    cbxSearch: TComboBox;
+    restClient: TRESTClient;
+    restRequest: TRESTRequest;
+    Memo1: TMemo;
+    procedure btnSearchClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmSearch: TfrmSearch;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmSearch.btnSearchClick(Sender: TObject);
+  var jArray : TJSONArray;
+  jMovies : TJSONArray;
+  Value: TJSONValue;
+begin
+  restRequest.AddParameter('s', txtSearch.Text);
+  restRequest.Execute;
+  //Memo1.Text := restRequest.Response.JSONValue.ToString;
+  jArray:= TJSONArray(restRequest.Response.JSONValue);
+  Value := jArray.Items[0];
+
+  //jMovies:= TJSONArray(Value);
+  ShowMessage(Value.ToString);
+  //Value := jMovies.Get(0);
+  //ShowMessage(Value.ToString);
+end;
+
+end.

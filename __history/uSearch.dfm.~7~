@@ -1,0 +1,326 @@
+object frmSearch: TfrmSearch
+  Left = 0
+  Top = 0
+  BorderWidth = 1
+  Caption = 'My Movies | Find movies'
+  ClientHeight = 650
+  ClientWidth = 953
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object imgPoster: TImage
+    Left = 505
+    Top = 8
+    Width = 300
+    Height = 447
+  end
+  object lblTitle: TLabel
+    Left = 196
+    Top = 61
+    Width = 20
+    Height = 13
+    Caption = 'Title'
+  end
+  object lblYear: TLabel
+    Left = 387
+    Top = 61
+    Width = 22
+    Height = 13
+    Caption = 'Year'
+  end
+  object lblRated: TLabel
+    Left = 298
+    Top = 111
+    Width = 29
+    Height = 13
+    Caption = 'Rated'
+  end
+  object lblReleaseDate: TLabel
+    Left = 56
+    Top = 164
+    Width = 64
+    Height = 13
+    Caption = 'Release Date'
+  end
+  object lblRunningTime: TLabel
+    Left = 356
+    Top = 111
+    Width = 64
+    Height = 13
+    Caption = 'Running Time'
+  end
+  object lblGenre: TLabel
+    Left = 146
+    Top = 111
+    Width = 29
+    Height = 13
+    Caption = 'Genre'
+  end
+  object lblDirector: TLabel
+    Left = 205
+    Top = 212
+    Width = 38
+    Height = 13
+    Caption = 'Director'
+  end
+  object lblWriter: TLabel
+    Left = 349
+    Top = 212
+    Width = 30
+    Height = 13
+    Caption = 'Writer'
+  end
+  object lblActors: TLabel
+    Left = 224
+    Top = 258
+    Width = 31
+    Height = 13
+    Caption = 'Actors'
+  end
+  object lblSynopsis: TLabel
+    Left = 217
+    Top = 327
+    Width = 42
+    Height = 13
+    Caption = 'Synopsis'
+  end
+  object lblLanguage: TLabel
+    Left = 315
+    Top = 164
+    Width = 47
+    Height = 13
+    Caption = 'Language'
+  end
+  object lblCountry: TLabel
+    Left = 82
+    Top = 212
+    Width = 39
+    Height = 13
+    Caption = 'Country'
+  end
+  object lblAwards: TLabel
+    Left = 220
+    Top = 407
+    Width = 36
+    Height = 13
+    Caption = 'Awards'
+  end
+  object lblMetascore: TLabel
+    Left = 662
+    Top = 506
+    Width = 50
+    Height = 13
+    Caption = 'Metascore'
+  end
+  object lblProduction: TLabel
+    Left = 214
+    Top = 453
+    Width = 51
+    Height = 13
+    Caption = 'Production'
+  end
+  object lblImdbRating: TLabel
+    Left = 64
+    Top = 582
+    Width = 59
+    Height = 13
+    Caption = 'IMDb Rating'
+  end
+  object lblImdbVotes: TLabel
+    Left = 224
+    Top = 528
+    Width = 55
+    Height = 13
+    Caption = 'IMDb Votes'
+  end
+  object lblDvd: TLabel
+    Left = 147
+    Top = 164
+    Width = 87
+    Height = 13
+    Caption = 'DVD Release Date'
+  end
+  object lblWebsite: TLabel
+    Left = 641
+    Top = 461
+    Width = 39
+    Height = 13
+    Caption = 'Website'
+  end
+  object lblWebsiteLink: TLabel
+    Left = 593
+    Top = 480
+    Width = 137
+    Height = 13
+    Caption = 'http://www.exemple.com.br'
+  end
+  object txtSearch: TEdit
+    Left = 48
+    Top = 24
+    Width = 297
+    Height = 21
+    TabOrder = 0
+    Text = 'Edit1'
+  end
+  object btnSearch: TButton
+    Left = 351
+    Top = 22
+    Width = 78
+    Height = 25
+    Caption = 'Search'
+    TabOrder = 1
+    OnClick = btnSearchClick
+  end
+  object txtName: TEdit
+    Left = 49
+    Top = 80
+    Width = 314
+    Height = 21
+    TabOrder = 2
+  end
+  object txtYear: TEdit
+    Left = 369
+    Top = 80
+    Width = 60
+    Height = 21
+    TabOrder = 3
+  end
+  object txtRated: TEdit
+    Left = 279
+    Top = 130
+    Width = 66
+    Height = 21
+    TabOrder = 4
+  end
+  object txtReleaseDate: TEdit
+    Left = 48
+    Top = 183
+    Width = 81
+    Height = 21
+    TabOrder = 5
+  end
+  object txtRunningTime: TEdit
+    Left = 351
+    Top = 130
+    Width = 78
+    Height = 21
+    TabOrder = 6
+  end
+  object txtGenre: TEdit
+    Left = 48
+    Top = 130
+    Width = 225
+    Height = 21
+    TabOrder = 7
+  end
+  object txtDirector: TEdit
+    Left = 160
+    Top = 231
+    Width = 129
+    Height = 21
+    TabOrder = 8
+  end
+  object txtWriter: TEdit
+    Left = 300
+    Top = 231
+    Width = 129
+    Height = 21
+    TabOrder = 9
+  end
+  object txtActors: TMemo
+    Left = 49
+    Top = 277
+    Width = 380
+    Height = 44
+    Lines.Strings = (
+      'txtActors')
+    TabOrder = 10
+  end
+  object txtSynopsis: TMemo
+    Left = 48
+    Top = 346
+    Width = 381
+    Height = 55
+    Lines.Strings = (
+      'txtActors')
+    TabOrder = 11
+  end
+  object txtLanguage: TEdit
+    Left = 250
+    Top = 183
+    Width = 179
+    Height = 21
+    TabOrder = 12
+  end
+  object txtCountry: TEdit
+    Left = 49
+    Top = 231
+    Width = 105
+    Height = 21
+    TabOrder = 13
+  end
+  object txtAwards: TEdit
+    Left = 48
+    Top = 426
+    Width = 381
+    Height = 21
+    TabOrder = 14
+  end
+  object txtMetascore: TEdit
+    Left = 665
+    Top = 525
+    Width = 40
+    Height = 37
+    TabOrder = 15
+  end
+  object txtProduction: TEdit
+    Left = 49
+    Top = 472
+    Width = 380
+    Height = 21
+    TabOrder = 16
+  end
+  object txtImdbRating: TEdit
+    Left = 129
+    Top = 579
+    Width = 105
+    Height = 21
+    TabOrder = 17
+  end
+  object txtImdbVotes: TEdit
+    Left = 289
+    Top = 525
+    Width = 105
+    Height = 21
+    TabOrder = 18
+  end
+  object txtDvd: TEdit
+    Left = 150
+    Top = 183
+    Width = 81
+    Height = 21
+    TabOrder = 19
+  end
+  object RESTRequest1: TRESTRequest
+    Client = RESTClient1
+    Params = <>
+    SynchronizedEvents = False
+    Left = 752
+    Top = 24
+  end
+  object RESTClient1: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'utf-8, *;q=0.8'
+    BaseURL = 'http://www.omdbapi.com/?apikey=497de05c'
+    Params = <>
+    Left = 664
+    Top = 24
+  end
+end
