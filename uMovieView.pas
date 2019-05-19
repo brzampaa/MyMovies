@@ -91,6 +91,7 @@ procedure TfrmMovieView.FormShow(Sender: TObject);
 var
   r : TRating;
 begin
+  frmMovieView.Caption := 'My Movies | ' + movie.Title;
   txtTitle.Text := movie.Title;
   txtYear.Text := movie.Year;
   txtGenre.Text := movie.Genre;

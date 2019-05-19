@@ -23,7 +23,6 @@ object frmMovieView: TfrmMovieView
     Top = 6
     Width = 357
     Height = 532
-    Proportional = True
     Stretch = True
   end
   object lblTitle: TLabel
