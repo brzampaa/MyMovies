@@ -11,3 +11,6 @@ First layout to Search's page <br>
 
 Movie information's frameView <br>
 ![screeshot](https://imagizer.imageshack.com/img921/4331/MAyhsB.jpg)
+
+# API
+Information provided by RESTFull OMDb API. [(Acess OMDb's page)](http://www.omdbapi.com)
