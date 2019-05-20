@@ -93,17 +93,17 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="uMain.pas">
+        <DCCReference Include="source\uMain.pas">
             <Form>frmMain</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uMovie.pas"/>
-        <DCCReference Include="uRating.pas"/>
-        <DCCReference Include="uMovieView.pas">
+        <DCCReference Include="source\uMovie.pas"/>
+        <DCCReference Include="source\uRating.pas"/>
+        <DCCReference Include="source\uMovieView.pas">
             <Form>frmMovieView</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uSearch.pas">
+        <DCCReference Include="source\uSearch.pas">
             <Form>frmSearch</Form>
             <FormType>dfm</FormType>
         </DCCReference>
