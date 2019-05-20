@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, REST.Types, REST.Client,
-  Data.Bind.Components, Data.Bind.ObjectScope, Json, System.Generics.Collections, uMovie;
+  Data.Bind.Components, Data.Bind.ObjectScope, Json, System.Generics.Collections, uMovie, System.Generics.Defaults;
 
 type
   TfrmSearch = class(TForm)
@@ -61,8 +61,8 @@ var
   jArray : TJSONArray;
   jMovies : TJSONArray;
   Value: TJSONValue;
-
   m : TMovie;
+  Comp : IComparer<TMovie>;
 begin
   restRequest.AddParameter('s', title);
   //restRequest.AddParameter('type','episode');
@@ -77,7 +77,16 @@ begin
   begin
     movies.Add(TMovie.FromJsonString(Value.ToString));
   end;
-
+  //movies.Sort;
+  Comp := TComparer<TMovie>.Construct(
+    function (const L, R : TMovie) : integer
+    begin
+      result := CompareStr(L.Year, R.Year);
+      if result = 0 then
+        result := CompareStr(l.Year, R.Year);
+    end
+  );
+  //TObjectList.sort (movies, Comp);
   for m in movies do
   begin
     lstMovies.Items.Add(m.Title + ' | ' + m.Year);
