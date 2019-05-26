@@ -1,0 +1,38 @@
+object frmFavorites: TfrmFavorites
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  BorderWidth = 5
+  Caption = 'My Movies | Favorites'
+  ClientHeight = 186
+  ClientWidth = 345
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnMouseEnter = FormMouseEnter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lstFavorites: TListBox
+    Left = 0
+    Top = 0
+    Width = 345
+    Height = 186
+    Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ItemHeight = 13
+    ParentFont = False
+    TabOrder = 0
+    OnDblClick = lstFavoritesDblClick
+  end
+end

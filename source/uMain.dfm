@@ -5,9 +5,11 @@ object frmMain: TfrmMain
   Margins.Top = 0
   Margins.Right = 0
   Margins.Bottom = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'My Movies'
-  ClientHeight = 134
-  ClientWidth = 276
+  ClientHeight = 144
+  ClientWidth = 286
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +23,7 @@ object frmMain: TfrmMain
   object imgMainBkg: TImage
     Left = 0
     Top = 0
-    Width = 276
+    Width = 286
     Height = 137
     Margins.Left = 0
     Margins.Top = 0
@@ -491,5 +493,6 @@ object frmMain: TfrmMain
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000FFFF0100FFFF01000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000}
+    OnClick = btnFavClick
   end
 end

@@ -2,8 +2,8 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2019/05/17 15:35:22.000.904,=C:\Users\Windows 10\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2019/05/17 16:11:14.000.115,C:\Users\Windows 10\Documents\Embarcadero\Studio\Projects\Unit2.dfm=E:\MyMovies\uMain.dfm</Transaction>
     <Transaction>2019/05/17 16:11:14.000.115,C:\Users\Windows 10\Documents\Embarcadero\Studio\Projects\Unit2.pas=E:\MyMovies\uMain.pas</Transaction>
+    <Transaction>2019/05/17 16:11:14.000.115,C:\Users\Windows 10\Documents\Embarcadero\Studio\Projects\Unit2.dfm=E:\MyMovies\uMain.dfm</Transaction>
     <Transaction>2019/05/17 16:11:37.000.788,C:\Users\Windows 10\Documents\Embarcadero\Studio\Projects\Project2.dproj=E:\MyMovies\MyMoviesProject.dproj</Transaction>
     <Transaction>2019/05/19 09:31:04.000.171,=C:\Git\Git\MyMovies\uMovie.pas</Transaction>
     <Transaction>2019/05/19 09:31:04.000.189,=C:\Git\Git\MyMovies\uRating.pas</Transaction>
@@ -16,26 +16,43 @@
     <Transaction>2019/05/19 09:33:04.000.058,=C:\Git\MyMovies\Unit1.pas</Transaction>
     <Transaction>2019/05/19 09:34:27.000.800,C:\Git\MyMovies\Unit1.pas=C:\Git\MyMovies\uSearch.pas</Transaction>
     <Transaction>2019/05/19 09:34:27.000.800,C:\Git\MyMovies\Unit1.dfm=C:\Git\MyMovies\uSearch.dfm</Transaction>
-    <Transaction>2019/05/19 10:49:45.000.420,C:\Git\MyMovies\uMovieView.pas=C:\Git\MyMovies\uSearch.pas</Transaction>
     <Transaction>2019/05/19 10:49:45.000.420,C:\Git\MyMovies\uMovieView.dfm=C:\Git\MyMovies\uSearch.dfm</Transaction>
+    <Transaction>2019/05/19 10:49:45.000.420,C:\Git\MyMovies\uMovieView.pas=C:\Git\MyMovies\uSearch.pas</Transaction>
     <Transaction>2019/05/19 10:50:50.000.489,=C:\Git\MyMovies\Unit1.pas</Transaction>
-    <Transaction>2019/05/19 10:50:56.000.807,C:\Git\MyMovies\uSearch.dfm=C:\Git\MyMovies\Unit1.dfm</Transaction>
     <Transaction>2019/05/19 10:50:56.000.807,C:\Git\MyMovies\uSearch.pas=C:\Git\MyMovies\Unit1.pas</Transaction>
-    <Transaction>2019/05/20 09:48:53.467,C:\Git\MyMovies\source\uMain.dfm=C:\Git\MyMovies\uMain.dfm</Transaction>
-    <Transaction>2019/05/20 09:48:53.467,C:\Git\MyMovies\source\uMain.pas=C:\Git\MyMovies\uMain.pas</Transaction>
-    <Transaction>2019/05/20 09:49:07.115,C:\Git\MyMovies\source\uMovie.pas=C:\Git\MyMovies\uMovie.pas</Transaction>
-    <Transaction>2019/05/20 09:49:15.696,C:\Git\MyMovies\source\uMovieView.dfm=C:\Git\MyMovies\uMovieView.dfm</Transaction>
-    <Transaction>2019/05/20 09:49:15.696,C:\Git\MyMovies\source\uMovieView.pas=C:\Git\MyMovies\uMovieView.pas</Transaction>
-    <Transaction>2019/05/20 09:49:28.394,C:\Git\MyMovies\source\uRating.pas=C:\Git\MyMovies\uRating.pas</Transaction>
-    <Transaction>2019/05/20 09:49:36.287,C:\Git\MyMovies\source\uSearch.pas=C:\Git\MyMovies\uSearch.pas</Transaction>
-    <Transaction>2019/05/20 09:49:36.287,C:\Git\MyMovies\source\uSearch.dfm=C:\Git\MyMovies\uSearch.dfm</Transaction>
+    <Transaction>2019/05/19 10:50:56.000.807,C:\Git\MyMovies\uSearch.dfm=C:\Git\MyMovies\Unit1.dfm</Transaction>
+    <Transaction>2019/05/20 09:48:53.000.467,C:\Git\MyMovies\source\uMain.dfm=C:\Git\MyMovies\uMain.dfm</Transaction>
+    <Transaction>2019/05/20 09:48:53.000.467,C:\Git\MyMovies\source\uMain.pas=C:\Git\MyMovies\uMain.pas</Transaction>
+    <Transaction>2019/05/20 09:49:07.000.115,C:\Git\MyMovies\source\uMovie.pas=C:\Git\MyMovies\uMovie.pas</Transaction>
+    <Transaction>2019/05/20 09:49:15.000.696,C:\Git\MyMovies\source\uMovieView.pas=C:\Git\MyMovies\uMovieView.pas</Transaction>
+    <Transaction>2019/05/20 09:49:15.000.696,C:\Git\MyMovies\source\uMovieView.dfm=C:\Git\MyMovies\uMovieView.dfm</Transaction>
+    <Transaction>2019/05/20 09:49:28.000.394,C:\Git\MyMovies\source\uRating.pas=C:\Git\MyMovies\uRating.pas</Transaction>
+    <Transaction>2019/05/20 09:49:36.000.287,C:\Git\MyMovies\source\uSearch.dfm=C:\Git\MyMovies\uSearch.dfm</Transaction>
+    <Transaction>2019/05/20 09:49:36.000.287,C:\Git\MyMovies\source\uSearch.pas=C:\Git\MyMovies\uSearch.pas</Transaction>
+    <Transaction>2019/05/21 11:01:18.000.897,=E:\Git\MyMovies\Unit1.pas</Transaction>
+    <Transaction>2019/05/21 11:01:42.000.650,=E:\Git\MyMovies\Unit1.pas</Transaction>
+    <Transaction>2019/05/21 11:01:56.000.032,E:\Git\MyMovies\source\uFavorites.pas=E:\Git\MyMovies\Unit1.pas</Transaction>
+    <Transaction>2019/05/21 11:01:56.000.032,E:\Git\MyMovies\source\uFavorites.dfm=E:\Git\MyMovies\Unit1.dfm</Transaction>
+    <Transaction>2019/05/26 11:21:19.000.672,C:\Users\Zampaa'\Desktop\MyMovies\source\uMain.dfm=C:\Users\Zampaa'\Desktop\MyMovies\source\VCLMain.dfm</Transaction>
+    <Transaction>2019/05/26 11:21:19.000.672,C:\Users\Zampaa'\Desktop\MyMovies\source\uMain.pas=C:\Users\Zampaa'\Desktop\MyMovies\source\VCLMain.pas</Transaction>
+    <Transaction>2019/05/26 11:21:46.000.574,C:\Users\Zampaa'\Desktop\MyMovies\source\uMovieView.pas=C:\Users\Zampaa'\Desktop\MyMovies\source\VCLMovieView.pas</Transaction>
+    <Transaction>2019/05/26 11:21:46.000.574,C:\Users\Zampaa'\Desktop\MyMovies\source\uMovieView.dfm=C:\Users\Zampaa'\Desktop\MyMovies\source\VCLMovieView.dfm</Transaction>
+    <Transaction>2019/05/26 11:23:27.000.450,C:\Users\Zampaa'\Desktop\MyMovies\source\VCLMovieView.pas=C:\Users\Zampaa'\Desktop\MyMovies\source\uMovieView.pas</Transaction>
+    <Transaction>2019/05/26 11:23:27.000.450,C:\Users\Zampaa'\Desktop\MyMovies\source\VCLMovieView.dfm=C:\Users\Zampaa'\Desktop\MyMovies\source\uMovieView.dfm</Transaction>
+    <Transaction>2019/05/26 11:23:50.000.635,C:\Users\Zampaa'\Desktop\MyMovies\source\VCLMain.dfm=C:\Users\Zampaa'\Desktop\MyMovies\source\uMain.dfm</Transaction>
+    <Transaction>2019/05/26 11:23:50.000.635,C:\Users\Zampaa'\Desktop\MyMovies\source\VCLMain.pas=C:\Users\Zampaa'\Desktop\MyMovies\source\uMain.pas</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="source"/>
+    <File Path="source\uFavorites.pas"/>
+    <File Path="source\uFavorites.dfm"/>
     <File Path="source\uMain.pas"/>
+    <File Path="source\uMain.dfm"/>
     <File Path="source\uMovie.pas"/>
     <File Path="source\uMovieView.pas"/>
+    <File Path="source\uMovieView.dfm"/>
     <File Path="source\uRating.pas"/>
     <File Path="source\uSearch.pas"/>
+    <File Path="source\uSearch.dfm"/>
   </ProjectSortOrder>
 </BorlandProject>

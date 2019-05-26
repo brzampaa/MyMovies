@@ -1,0 +1,180 @@
+unit uFavorites;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.StdCtrls,
+  Vcl.Imaging.jpeg, Json, System.Generics.Collections, uMovie;
+
+type
+  TfrmFavorites = class(TForm)
+    lstFavorites: TListBox;
+    procedure FormShow(Sender: TObject);
+    procedure lstFavoritesDblClick(Sender: TObject);
+    procedure FormPaint(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure FormMouseEnter(Sender: TObject);
+  private
+    { Private declarations }
+    procedure showFavs();
+    var ms : TObjectList<TMovie>;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmFavorites: TfrmFavorites;
+
+implementation
+
+{$R *.dfm}
+
+uses uMovieView;
+
+procedure TfrmFavorites.FormActivate(Sender: TObject);
+begin
+  showFavs;
+end;
+
+procedure TfrmFavorites.FormMouseEnter(Sender: TObject);
+begin
+  lstFavorites.Clear;
+  showFavs;
+end;
+
+procedure TfrmFavorites.FormPaint(Sender: TObject);
+begin
+  showFavs;
+end;
+
+procedure TfrmFavorites.FormShow(Sender: TObject);
+var
+jObject : TJSONObject;
+jArray : TJSONArray;
+Value: TJSONValue;
+m : TMovie;
+ms : TObjectList<TMovie>;
+storedMovies : TJsonObject;
+movieFound : TJSONPair;
+F: TextFile;
+loadedFavs : string;
+s : string;
+begin
+  showFavs;
+  {storedMovies := TJSONObject.Create;
+  AssignFile(F, 'data.txt');
+  Reset(F);
+  ReadLn(F,loadedFavs);
+  if loadedFavs <> '' then
+  begin
+    //ShowMessage('Aqui');
+    //ShowMessage(loadedFavs);
+    ms := TObjectList<TMovie>.Create;
+    jArray := TJSONObject.ParseJSONValue(TEncoding.ASCII.GetBytes(loadedFavs), 0) as TJSONArray;
+    //jArray := loadedFavs as TJSONArray;
+    //ShowMessage('KEY>>>>>>>>>>>' + storedMovies.Pairs[0].JsonString.ToString);
+    //ShowMessage('VAL>>>>>>>>>>>' + storedMovies.Pairs[0].JsonValue.ToString);
+
+    for Value in jArray do
+    begin
+      ShowMessage(value.ToString);
+      //ms.Add(TMovie.FromJsonString(Value.ToString));
+    end;}
+    //Value := storedMovies as TJSONValue;
+    {for movieFound in storedMovies do
+    begin
+      Value := movieFound.JsonValue as TJSONValue;
+      s := StringReplace(value.ToString,'\','',[rfReplaceAll]);
+      s := StringReplace(s,'https:/','https://',[rfReplaceAll]);
+      //ShowMessage(s);
+      Memo1.Text := s;
+      //jArray:= Value as TJSONArray;
+      //for Value in jArray do
+      //begin
+      ms.Add(TMovie.FromJsonString(s));
+      //end;
+      //ms.Add(TMovie.FromJsonString(movieFound.JsonValue.ToString));
+    end;}
+
+    //jArray:= Value as TJSONArray;
+    //ShowMessage(IntToStr(Length(jArray)));
+    {ShowMessage(ms[0].Actors);
+
+
+
+    //Value := storedMovies as TJSONValue;
+    //jArray:= storedMovies as TJSONArray;
+
+    {for Value in storedMovies do
+    begin
+      ms.Add(TMovie.FromJsonString(Value.ToString));
+    end;}
+    {for m in ms do
+    begin
+      lstFavorites.Items.Add(m.Title + ' | ' + m.Year);
+    end;}
+    //end;
+end;
+
+procedure TfrmFavorites.lstFavoritesDblClick(Sender: TObject);
+var m : TMovie;
+begin
+  frmMovieView := TfrmMovieView.Create(self);
+  frmMovieView.movie := TMovie.Create;
+  frmMovieView.Setmovie(ms.Items[lstFavorites.ItemIndex]);
+  frmMovieView.ShowModal;
+end;
+
+procedure TfrmFavorites.showFavs;
+var
+F: TextFile;
+jArray: TJSONArray;
+jObject: TJSONObject;
+JObjects : TJSONObject;
+loadedFavs : string;
+Value : TJSONValue;
+i: Integer;
+alreadyFav : boolean;
+deleteFav : integer;
+m : TMovie;
+begin
+  JObjects := TJSONObject.Create;
+  alreadyFav := false;
+  ms := TObjectList<TMovie>.Create;
+  AssignFile(F, 'data.txt');
+  if FileExists('data.txt') then
+  begin
+    Reset(F);
+    ReadLn(F,loadedFavs);
+    if NOT loadedFavs.IsEmpty then
+    begin
+      jObjects := TJSONObject.ParseJSONValue(TEncoding.ASCII.GetBytes(loadedFavs), 0) as TJSONObject;
+      i:=0;
+      while i < jObjects.Count do
+      begin
+        ms.Add(TMovie.FromJsonString(jObjects.Get(i).JsonValue.ToString));
+        Inc(i);
+      end;
+
+      for m in ms do
+      begin
+        lstFavorites.Items.Add(m.Title + ' | ' + m.Year);
+      end;
+      lstFavorites.Enabled := True;
+    end
+    else
+    begin
+      lstFavorites.Items.Add('You do not have any favorites yet.');
+      lstFavorites.Enabled := False;
+    end;
+    CloseFile(F);
+  end
+  else
+    begin
+      lstFavorites.Items.Add('You do not have any favorites yet.');
+      lstFavorites.Enabled := False;
+    end;
+end;
+
+end.

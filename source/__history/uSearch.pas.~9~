@@ -1,0 +1,110 @@
+unit uSearch;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, REST.Types, REST.Client,
+  Data.Bind.Components, Data.Bind.ObjectScope, Json, System.Generics.Collections, uMovie, System.Generics.Defaults,
+  Vcl.ComCtrls;
+
+type
+  TfrmSearch = class(TForm)
+    txtSearch: TEdit;
+    btnSearch: TButton;
+    lstMovies: TListBox;
+    restClient: TRESTClient;
+    restRequest: TRESTRequest;
+    procedure btnSearchClick(Sender: TObject);
+    procedure lstMoviesDblClick(Sender: TObject);
+  private
+    function findByTitle(title:string) : TObjectList<TMovie>;
+    function findById(id:string) : TMovie;
+    var ms : TObjectList<TMovie>;
+  public
+  end;
+
+var
+  frmSearch: TfrmSearch;
+
+implementation
+
+{$R *.dfm}
+uses uMovieView;
+
+procedure TfrmSearch.btnSearchClick(Sender: TObject);
+var
+  m : TMovie;
+begin
+  if txtSearch.Text <> '' then
+  begin
+    lstMovies.Clear;
+    ms := findByTitle(txtSearch.Text);
+    if ms <> nil then
+    begin
+      for m in ms do
+      begin
+        lstMovies.Items.Add(m.Title + ' | ' + m.Year);
+      end;
+      lstMovies.Enabled := true;
+    end
+    else
+    begin
+      lstMovies.Items.Add('No movies found.');
+      lstMovies.Enabled := false;
+    end;
+  end;
+end;
+
+function TfrmSearch.findById(id: string):TMovie;
+var
+  m : TMovie;
+begin
+  restRequest.ResetToDefaults;
+  restRequest.AddParameter('i', id);
+  restRequest.AddParameter('plot','full');
+  restRequest.Execute;
+  //ShowMessage(restRequest.Response.JSONValue.ToString);
+  //Memo1.Text := restRequest.Response.JSONValue.ToString;
+  m := TMovie.FromJsonString(restRequest.Response.JSONValue.ToString);
+  result := m;
+end;
+
+function TfrmSearch.findByTitle(title: string):TObjectList<TMovie>;
+var
+  jObject : TJSONObject;
+  jArray : TJSONArray;
+  Value: TJSONValue;
+  ms : TObjectList<TMovie>;
+begin
+  restRequest.AddParameter('s', title);
+  restRequest.Execute;
+  jObject := TJSONObject.ParseJSONValue(TEncoding.ASCII.GetBytes(restRequest.Response.JSONValue.ToString), 0) as TJSONObject;
+  if jObject.ToString <> '{"Response":"False","Error":"Movie not found!"}' then
+  begin
+    Value := jObject.Get('Search').JsonValue;
+    jArray:= Value as TJSONArray;
+    ms := TObjectList<TMovie>.Create;
+    for Value in jArray do
+    begin
+      ms.Add(TMovie.FromJsonString(Value.ToString));
+    end;
+    result := ms;
+  end
+  else
+  begin
+    result := nil;
+  end;
+end;
+
+procedure TfrmSearch.lstMoviesDblClick(Sender: TObject);
+var m : TMovie;
+begin
+  m := findById(ms[lstMovies.ItemIndex].imdbID);
+  frmMovieView := TfrmMovieView.Create(self);
+  frmMovieView.movie := TMovie.Create;
+  frmMovieView.Setmovie(m);
+  frmMovieView.ShowModal;
+end;
+
+end.

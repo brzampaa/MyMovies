@@ -1,0 +1,94 @@
+unit uFavorites;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.StdCtrls,
+  Vcl.Imaging.jpeg, Json, System.Generics.Collections, uMovie;
+
+type
+  TfrmFavorites = class(TForm)
+    lstFavorites: TListBox;
+    procedure FormShow(Sender: TObject);
+    procedure lstFavoritesDblClick(Sender: TObject);
+    procedure FormMouseEnter(Sender: TObject);
+  private
+    procedure showFavs();
+    var ms : TObjectList<TMovie>;
+  public
+  end;
+
+var
+  frmFavorites: TfrmFavorites;
+
+implementation
+
+{$R *.dfm}
+
+uses uMovieView;
+
+procedure TfrmFavorites.FormMouseEnter(Sender: TObject);
+begin
+  lstFavorites.Clear;
+  showFavs;
+end;
+
+procedure TfrmFavorites.FormShow(Sender: TObject);
+begin
+  showFavs;
+end;
+
+procedure TfrmFavorites.lstFavoritesDblClick(Sender: TObject);
+begin
+  frmMovieView := TfrmMovieView.Create(self);
+  frmMovieView.movie := TMovie.Create;
+  frmMovieView.Setmovie(ms.Items[lstFavorites.ItemIndex]);
+  frmMovieView.ShowModal;
+end;
+
+procedure TfrmFavorites.showFavs;
+var
+F: TextFile;
+JObjects : TJSONObject;
+loadedFavs : string;
+i: Integer;
+m : TMovie;
+begin
+  ms := TObjectList<TMovie>.Create;
+  AssignFile(F, 'data.txt');
+  if FileExists('data.txt') then
+  begin
+    Reset(F);
+    ReadLn(F,loadedFavs);
+    if NOT loadedFavs.IsEmpty then
+    begin
+      jObjects := TJSONObject.ParseJSONValue(TEncoding.ASCII.GetBytes(loadedFavs), 0) as TJSONObject;
+      i:=0;
+      while i < jObjects.Count do
+      begin
+        ms.Add(TMovie.FromJsonString(jObjects.Pairs[i].JsonValue.ToString));
+        Inc(i);
+      end;
+
+      for m in ms do
+      begin
+        lstFavorites.Items.Add(m.Title + ' | ' + m.Year);
+      end;
+      lstFavorites.Enabled := True;
+    end
+    else
+    begin
+      lstFavorites.Items.Add('You do not have any favorites yet.');
+      lstFavorites.Enabled := False;
+    end;
+    CloseFile(F);
+  end
+  else
+    begin
+      lstFavorites.Items.Add('You do not have any favorites yet.');
+      lstFavorites.Enabled := False;
+    end;
+end;
+
+end.

@@ -3,10 +3,11 @@ unit uMovieView;
 interface
 
 uses
-  Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Json, Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, REST.Types, REST.Client,
   Data.Bind.Components, Data.Bind.ObjectScope, Vcl.StdCtrls, Vcl.ExtCtrls, uMovie, Jpeg, idHTTP,
-  IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, ShellAPI;
+  IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, ShellAPI, System.Generics.Collections,
+  Vcl.Buttons;
 
 type
   TfrmMovieView = class(TForm)
@@ -47,17 +48,20 @@ type
     lblDvd: TLabel;
     txtRatings: TMemo;
     lblRatings: TLabel;
-    IdHTTP1: TIdHTTP;
+    http: TIdHTTP;
     lnkWebsite: TLinkLabel;
-    procedure btnSearchClick(Sender: TObject);
+    btnFav: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure lnkWebsiteClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure btnFavClick(Sender: TObject);
   private
     Fmovie: TMovie;
-    { Private declarations }
     procedure showPoster(url:string ; img:TImage);
+    function isFav():boolean;
+    function createJSONObject(m:TMovie):TJSONObject;
+    function addFav(m:TMovie):boolean;
   public
     procedure Setmovie(const Value: TMovie);
     property movie : TMovie read Fmovie write Setmovie;
@@ -72,12 +76,52 @@ implementation
 
 uses uRating;
 
-procedure TfrmMovieView.btnSearchClick(Sender: TObject);
+function TfrmMovieView.createJSONObject(m: TMovie): TJSONObject;
+//Creating the JSONObject to save to the data file
+var
+jObject : TJSONObject;
+jRatings : TJSONObject;
+jRatingsArray : TJSONArray;
+r : TRating;
 begin
-  //Memo1.Text := RESTRequest1.Response.JSONValue.ToString;
+  jObject := TJSONObject.Create;
+  jRatingsArray := TJSONArray.Create;
+  for r in m.Ratings do
+  begin
+    jRatings := TJSONObject.Create;
+    jRatings.AddPair('Source', r.Source);
+    jRatings.AddPair('Value', r.Value);
+    jRatingsArray.Add(jRatings);
+  end;
+  jObject.AddPair('Actors', m.Actors);
+  jObject.AddPair('Awards', m.Awards);
+  jObject.AddPair('BoxOffice', m.BoxOffice);
+  jObject.AddPair('Country', m.Country);
+  jObject.AddPair('DVD', m.DVD);
+  jObject.AddPair('Director', m.Director);
+  jObject.AddPair('Genre', m.Genre);
+  jObject.AddPair('Language', m.Language);
+  jObject.AddPair('Metascore', m.Metascore);
+  jObject.AddPair('Plot', m.Plot);
+  jObject.AddPair('Poster', m.Poster);
+  jObject.AddPair('Production', m.Production);
+  jObject.AddPair('Rated', m.Rated);
+  jObject.AddPair('Ratings', jRatingsArray);
+  jObject.AddPair('Released', m.Released);
+  jObject.AddPair('Response', m.Response);
+  jObject.AddPair('Runtime', m.Runtime);
+  jObject.AddPair('Title', m.Title);
+  jObject.AddPair('Website', m.Website);
+  jObject.AddPair('Writer', m.Writer);
+  jObject.AddPair('Year', m.Year);
+  jObject.AddPair('ImdbID', m.ImdbID);
+  jObject.AddPair('ImdbRating', m.ImdbRating);
+  jObject.AddPair('ImdbVotes', m.ImdbVotes);
+  result := jObject;
 end;
 
 procedure TfrmMovieView.FormActivate(Sender: TObject);
+//Set the form focus to "nothing"
 begin
   ActiveControl:= nil;
 end;
@@ -88,8 +132,9 @@ begin
 end;
 
 procedure TfrmMovieView.FormShow(Sender: TObject);
+//Loading form with movie info
 var
-  r : TRating;
+r : TRating;
 begin
   frmMovieView.Caption := 'My Movies | ' + movie.Title;
   txtTitle.Text := movie.Title;
@@ -113,7 +158,6 @@ begin
   begin
     txtRatings.Lines.Add(r.Source + ': ' + r.Value);
   end;
-
   if (movie.Website <> 'N/A') AND (movie.Website <> '') then
   begin
     lnkWebsite.Caption := '<a href=" '+ movie.Website +'">Website</a>';
@@ -124,11 +168,141 @@ begin
     lnkWebsite.Visible := false;
   end;
   showPoster(movie.Poster, imgPoster);
+
+  //Checking if the movie is already a favorite
+  if isFav then
+  begin
+    btnFav.Glyph.LoadFromFile(GetCurrentDir + '\icons\star.bmp');
+    btnFav.Hint := 'Click to remove favorite';
+    btnFav.ShowHint := true;
+  end;
+
+end;
+
+function TfrmMovieView.isFav: boolean;
+//Searching the data file if the movie ID is already added
+var
+storedMovies : TJsonObject;
+movieFound : TJSONPair;
+F: TextFile;
+loadedFavs : string;
+begin
+  if FileExists('data.txt') then
+  begin
+    AssignFile(F, 'data.txt');
+    Reset(F);
+    ReadLn(F,loadedFavs);
+    CloseFile(F);
+    if loadedFavs <> '' then
+    begin
+      storedMovies := TJSONObject.ParseJSONValue(TEncoding.ASCII.GetBytes(loadedFavs), 0) as TJSONObject;
+      movieFound := storedMovies.get(movie.imdbID);
+      if movieFound <> nil then
+      begin
+        result := true;
+      end
+      else
+      begin
+        result := false;
+      end;
+    end
+    else
+    begin
+      result := false;
+    end;
+  end
+  else
+  begin
+    AssignFile(F, 'data.txt');
+    Rewrite(F);
+    CloseFile(F);
+    result := false;
+  end;
 end;
 
 procedure TfrmMovieView.lnkWebsiteClick(Sender: TObject);
 begin
   ShellExecute(0, nil, PChar(movie.Website), nil, nil, 1);
+end;
+
+function TfrmMovieView.addFav(m: TMovie):boolean;
+var
+F: TextFile;
+jObject: TJSONObject;
+JObjects : TJSONObject;
+loadedFavs : string;
+ms : TObjectList<TMovie>;
+i: Integer;
+alreadyFav : boolean;
+deleteFav : integer;
+begin
+  deleteFav := -1;
+  alreadyFav := false;
+  ms := TObjectList<TMovie>.Create;
+  AssignFile(F, 'data.txt');
+
+  if FileExists('data.txt') then
+  begin
+    Reset(F);
+    ReadLn(F,loadedFavs);
+    if NOT loadedFavs.IsEmpty then
+    begin
+      jObjects := TJSONObject.ParseJSONValue(TEncoding.ASCII.GetBytes(loadedFavs), 0) as TJSONObject;
+      i:=0;
+      while i < jObjects.Count do
+      begin
+        ms.Add(TMovie.FromJsonString(jObjects.Pairs[i].JsonValue.ToString));
+        if ms.Items[i].imdbID = m.imdbID then
+        begin
+          alreadyFav := true;
+          deleteFav := i;
+        end;
+        Inc(i);
+      end;
+    end;
+  end;
+
+  if alreadyFav then
+  begin
+    ms.Delete(deleteFav);
+    jObject := TJSONObject.Create;
+    i:=0;
+    if ms.Count <> 0 then
+    begin
+      while i < ms.Count do
+      begin
+        jObject.AddPair(ms.Items[i].imdbID, createJSONObject(ms.Items[i]));
+        Inc(i);
+        Rewrite(F);
+        WriteLn(F, jObject.ToJSON);
+        CloseFile(F);
+      end;
+      result := false;
+    end
+    else
+    begin
+      Rewrite(F);
+      WriteLn(F, '');
+      CloseFile(F);
+      result := false;
+    end;
+  end
+  else
+  begin
+    ms.Add(m);
+    jObject := TJSONObject.Create;
+    i:=0;
+    while i < ms.Count do
+    begin
+      jObject.AddPair(ms.Items[i].imdbID, createJSONObject(ms.Items[i]));
+      Inc(i);
+      Rewrite(F);
+      WriteLn(F, jObject.ToJSON);
+      CloseFile(F);
+    end;
+    result := true;
+  end;
+
 end;
 
 procedure TfrmMovieView.Setmovie(const Value: TMovie);
@@ -137,7 +311,7 @@ begin
 end;
 
 procedure TfrmMovieView.showPoster(url: string ; img:TImage);
-
+//Download and display movie poster
 var
   Jpeg: TJPEGImage;
   Strm: TMemoryStream;
@@ -148,10 +322,10 @@ begin
   Screen.Cursor := crHourGlass;
   Jpeg := TJPEGImage.Create;
   Strm := TMemoryStream.Create;
-  IdHTTP1 := TIdHTTP.Create(nil);
+  http := TIdHTTP.Create(nil);
   try
     try
-      IdHTTP1.Get(movie.Poster, Strm);
+      http.Get(movie.Poster, Strm);
       if (Strm.Size > 0) then
       begin
         Strm.Position := 0;
@@ -165,11 +339,25 @@ begin
   finally
     Strm.Free;
     Jpeg.Free;
-    IdHTTP1.Free;
+    http.Free;
     Screen.Cursor := crDefault;
   end;
-  
-  ActiveControl:= nil;
+end;
+
+procedure TfrmMovieView.btnFavClick(Sender: TObject);
+begin
+  if addFav(movie) then
+  begin
+    btnFav.Glyph.LoadFromFile(GetCurrentDir + '\icons\star.bmp');
+    btnFav.Hint := 'Click to remove favorite';
+    btnFav.ShowHint := true;
+  end
+  else
+  begin
+    btnFav.Glyph.LoadFromFile(GetCurrentDir + '\icons\star_off.bmp');
+    btnFav.Hint := 'Click to add favorite';
+    btnFav.ShowHint := true;
+  end;
 end;
 
 end.

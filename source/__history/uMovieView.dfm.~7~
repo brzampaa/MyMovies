@@ -1,0 +1,435 @@
+object frmMovieView: TfrmMovieView
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  BorderWidth = 1
+  Caption = 'My Movies | Find movies'
+  ClientHeight = 572
+  ClientWidth = 773
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnActivate = FormActivate
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object imgPoster: TImage
+    Left = 403
+    Top = 6
+    Width = 357
+    Height = 532
+    Stretch = True
+  end
+  object lblTitle: TLabel
+    Left = 156
+    Top = 6
+    Width = 20
+    Height = 13
+    Caption = 'Title'
+  end
+  object lblYear: TLabel
+    Left = 347
+    Top = 6
+    Width = 22
+    Height = 13
+    Caption = 'Year'
+  end
+  object lblRated: TLabel
+    Left = 258
+    Top = 56
+    Width = 29
+    Height = 13
+    Caption = 'Rated'
+  end
+  object lblReleaseDate: TLabel
+    Left = 16
+    Top = 109
+    Width = 64
+    Height = 13
+    Caption = 'Release Date'
+  end
+  object lblRunningTime: TLabel
+    Left = 316
+    Top = 56
+    Width = 64
+    Height = 13
+    Caption = 'Running Time'
+  end
+  object lblGenre: TLabel
+    Left = 106
+    Top = 56
+    Width = 29
+    Height = 13
+    Caption = 'Genre'
+  end
+  object lblDirector: TLabel
+    Left = 165
+    Top = 157
+    Width = 38
+    Height = 13
+    Caption = 'Director'
+  end
+  object lblWriter: TLabel
+    Left = 309
+    Top = 157
+    Width = 30
+    Height = 13
+    Caption = 'Writer'
+  end
+  object lblActors: TLabel
+    Left = 184
+    Top = 203
+    Width = 31
+    Height = 13
+    Caption = 'Actors'
+  end
+  object lblSynopsis: TLabel
+    Left = 177
+    Top = 272
+    Width = 42
+    Height = 13
+    Caption = 'Synopsis'
+  end
+  object lblLanguage: TLabel
+    Left = 275
+    Top = 109
+    Width = 47
+    Height = 13
+    Caption = 'Language'
+  end
+  object lblCountry: TLabel
+    Left = 42
+    Top = 157
+    Width = 39
+    Height = 13
+    Caption = 'Country'
+  end
+  object lblAwards: TLabel
+    Left = 180
+    Top = 352
+    Width = 36
+    Height = 13
+    Caption = 'Awards'
+  end
+  object lblProduction: TLabel
+    Left = 174
+    Top = 398
+    Width = 51
+    Height = 13
+    Caption = 'Production'
+  end
+  object lblImdbRating: TLabel
+    Left = 9
+    Top = 455
+    Width = 59
+    Height = 13
+    Caption = 'IMDb Rating'
+  end
+  object lblImdbVotes: TLabel
+    Left = 194
+    Top = 455
+    Width = 55
+    Height = 13
+    Caption = 'IMDb Votes'
+  end
+  object lblDvd: TLabel
+    Left = 107
+    Top = 109
+    Width = 87
+    Height = 13
+    Caption = 'DVD Release Date'
+  end
+  object lblRatings: TLabel
+    Left = 180
+    Top = 483
+    Width = 36
+    Height = 13
+    Caption = 'Ratings'
+  end
+  object btnFav: TSpeedButton
+    Left = 414
+    Top = 16
+    Width = 30
+    Height = 30
+    Cursor = crHandPoint
+    Hint = 'Click to add favorite'
+    Glyph.Data = {
+      36090000424D3609000000000000360000002800000018000000180000000100
+      20000000000000090000C40E0000C40E00000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000069A5CD8167ABE21400000000000000000000
+      0000000000000000000000000000000000000000000000000000000000005CA8
+      CD166AA7CD800000000000000000000000000000000000000000000000000000
+      00000000000000000000000000006DA7CB9BACACACFF62A8D550000000000000
+      000000000000000000000000000000000000000000000000000063ABD555ACAC
+      ACFF6BA7CC940000000000000000000000000000000000000000000000000000
+      000000000000000000000000000060A3D31DACACACFFA7A9AAFF71A8CAA982FF
+      FF020000000000000000000000000000000082FFFF0272A7C9AEAAABACFFACAC
+      ACFF57A0C3170000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000008DABBAF1B9B9B9FFA9AFB3FF89A9
+      BEEB5EA5D42300000000000000005DA7D9268AAABDEDA7ADB0FFB9B9B9FF8CAD
+      BFEE000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000006EA8CCA0A9AFB4FEC3C3C3FFB2B6
+      B7FFA1ACB4FD64A4CD6B69A7D070A1ABB2FEB2B6B8FFC3C3C3FFA9AFB4FE6EAA
+      CE99000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000060ABD725A7ABADFFC3C3C3FFC4C4
+      C4FFBDBDBDFFA8A9A9FFAAABACFFBEBEBEFFC4C4C4FFC3C3C3FFA7ABADFF59A1
+      CD1F000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000092ACBAF4BDBDBDFFC4C4
+      C4FFC4C4C4FFC2C2C2FFC2C2C2FFC4C4C4FFC4C4C4FFBDBDBDFF8FACBDF20000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000006FA8CAA8ACB3B6FFC4C4
+      C4FFC4C4C4FFC4C4C4FFC4C4C4FFC4C4C4FFC4C4C4FFADB4B7FF6FA8CBA20000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000005CA8CD1688A9BEEBA8AAABFFC4C4
+      C4FFC4C4C4FFC4C4C4FFC4C4C4FFC4C4C4FFC4C4C4FFA8AAABFF86AABDE95CA8
+      CD16000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000060A7CF579AAAB5FCABB2B4FFC3C3C3FFC4C4
+      C4FFC4C4C4FFC4C4C4FFC4C4C4FFC4C4C4FFC4C4C4FFC3C3C3FFADB3B5FF99A9
+      B3FC63ABD5550000000000000000000000000000000000000000000000000000
+      00000000000082FFFF0273AACAB1A4A9ACFFBBBBBBFFC4C4C4FFC4C4C4FFC4C4
+      C4FFC4C4C4FFC4C4C4FFC4C4C4FFC4C4C4FFC4C4C4FFC4C4C4FFC4C4C4FFB7B8
+      B8FFA4A9ACFF72A7C9AE82FFFF02000000000000000000000000000000000000
+      000061A2D02A8AAABAEFAAB0B4FFC0C0C0FFC4C4C4FFC4C4C4FFC4C4C4FFC4C4
+      C4FFC4C4C4FFC4C4C4FFC4C4C4FFC4C4C4FFC4C4C4FFC4C4C4FFC4C4C4FFC4C4
+      C4FFC1C1C1FFAAB0B4FF8CADBFEE5DA7D9260000000000000000000000006AAA
+      D076ACACACFFACACACFFA5AAACFFA3A9ABFFA3A9ABFFA3A9ABFFA3A9ABFFACAC
+      ACFFBEBEBEFFC4C4C4FFC4C4C4FFBEBEBEFFACACACFFA3A9ABFFA3A9ABFFA3A9
+      ABFFA3A9ABFFA9ACAEFFACACACFFACACACFF68A8CE71000000000000000060AB
+      D7255DA7D9265DA7D9265DA7D9265DA7D9265DA7D9265DA7D9265DA7D92677A8
+      C5C6AFB5B7FFC4C4C4FFC4C4C4FFAEB4B6FF76A8C6C15DA7D9265DA7D9265DA7
+      D9265DA7D9265DA7D9265DA7D9265DA7D9265EA5D42300000000000000000000
+      00000000000000000000000000000000000000000000000000000000000061A7
+      D33FA3A9ACFFC4C4C4FFC3C3C3FFA4AAACFF5FA4D53800000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000099ACB7FABFBFBFFFBEBEBEFF97ACB9F90000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000077AAC8BFB0B5B6FFADB3B4FF73A7C6BA0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000066A9D44BA3A9ACFFA4AAACFF62A4CD430000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000ACACACFFACACACFF000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000084A9BFE582A9BFE1000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000061A5D05462A8D550000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000082FFFF0282FFFF02000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000}
+    ParentShowHint = False
+    ShowHint = True
+    OnClick = btnFavClick
+  end
+  object txtTitle: TEdit
+    Left = 9
+    Top = 25
+    Width = 314
+    Height = 21
+    Alignment = taCenter
+    ReadOnly = True
+    TabOrder = 0
+  end
+  object txtYear: TEdit
+    Left = 329
+    Top = 25
+    Width = 60
+    Height = 21
+    Alignment = taCenter
+    ReadOnly = True
+    TabOrder = 1
+  end
+  object txtRated: TEdit
+    Left = 239
+    Top = 75
+    Width = 66
+    Height = 21
+    Alignment = taCenter
+    ReadOnly = True
+    TabOrder = 2
+  end
+  object txtReleaseDate: TEdit
+    Left = 8
+    Top = 128
+    Width = 81
+    Height = 21
+    Alignment = taCenter
+    ReadOnly = True
+    TabOrder = 3
+  end
+  object txtRunningTime: TEdit
+    Left = 311
+    Top = 75
+    Width = 78
+    Height = 21
+    Alignment = taCenter
+    ReadOnly = True
+    TabOrder = 4
+  end
+  object txtGenre: TEdit
+    Left = 8
+    Top = 75
+    Width = 225
+    Height = 21
+    Alignment = taCenter
+    ReadOnly = True
+    TabOrder = 5
+  end
+  object txtDirector: TEdit
+    Left = 120
+    Top = 176
+    Width = 129
+    Height = 21
+    Alignment = taCenter
+    ReadOnly = True
+    TabOrder = 6
+  end
+  object txtWriter: TEdit
+    Left = 260
+    Top = 176
+    Width = 129
+    Height = 21
+    Alignment = taCenter
+    ReadOnly = True
+    TabOrder = 7
+  end
+  object txtActors: TMemo
+    Left = 9
+    Top = 222
+    Width = 380
+    Height = 44
+    Alignment = taCenter
+    ReadOnly = True
+    TabOrder = 8
+  end
+  object txtSynopsis: TMemo
+    Left = 8
+    Top = 291
+    Width = 381
+    Height = 55
+    Alignment = taCenter
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 9
+  end
+  object txtLanguage: TEdit
+    Left = 210
+    Top = 128
+    Width = 179
+    Height = 21
+    Alignment = taCenter
+    ReadOnly = True
+    TabOrder = 10
+  end
+  object txtCountry: TEdit
+    Left = 9
+    Top = 176
+    Width = 105
+    Height = 21
+    Alignment = taCenter
+    ReadOnly = True
+    TabOrder = 11
+  end
+  object txtAwards: TEdit
+    Left = 8
+    Top = 371
+    Width = 381
+    Height = 21
+    Alignment = taCenter
+    ReadOnly = True
+    TabOrder = 12
+  end
+  object txtProduction: TEdit
+    Left = 9
+    Top = 417
+    Width = 380
+    Height = 21
+    Alignment = taCenter
+    ReadOnly = True
+    TabOrder = 13
+  end
+  object txtImdbRating: TEdit
+    Left = 74
+    Top = 452
+    Width = 105
+    Height = 21
+    Alignment = taCenter
+    ReadOnly = True
+    TabOrder = 14
+  end
+  object txtImdbVotes: TEdit
+    Left = 255
+    Top = 452
+    Width = 134
+    Height = 21
+    Alignment = taCenter
+    ReadOnly = True
+    TabOrder = 15
+  end
+  object txtDvd: TEdit
+    Left = 110
+    Top = 128
+    Width = 81
+    Height = 21
+    Alignment = taCenter
+    ReadOnly = True
+    TabOrder = 16
+  end
+  object txtRatings: TMemo
+    Left = 8
+    Top = 502
+    Width = 381
+    Height = 55
+    Alignment = taCenter
+    ReadOnly = True
+    TabOrder = 17
+  end
+  object lnkWebsite: TLinkLabel
+    Left = 563
+    Top = 544
+    Width = 43
+    Height = 17
+    Caption = 'Website'
+    TabOrder = 18
+    OnClick = lnkWebsiteClick
+  end
+  object IdHTTP1: TIdHTTP
+    AllowCookies = True
+    ProxyParams.BasicAuthentication = False
+    ProxyParams.ProxyPort = 0
+    Request.ContentLength = -1
+    Request.ContentRangeEnd = -1
+    Request.ContentRangeStart = -1
+    Request.ContentRangeInstanceLength = -1
+    Request.Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    Request.BasicAuthentication = False
+    Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
+    Request.Ranges.Units = 'bytes'
+    Request.Ranges = <>
+    HTTPOptions = [hoForceEncodeParams]
+    Left = 720
+    Top = 480
+  end
+  object SaveDialog1: TSaveDialog
+    Left = 672
+    Top = 480
+  end
+end

@@ -1,10 +1,12 @@
 object frmSearch: TfrmSearch
   Left = 0
   Top = 0
-  BorderStyle = bsDialog
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  BorderWidth = 10
   Caption = 'MyMovies | Find movies'
-  ClientHeight = 277
-  ClientWidth = 492
+  ClientHeight = 257
+  ClientWidth = 472
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,29 +15,43 @@ object frmSearch: TfrmSearch
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
+  DesignSize = (
+    472
+    257)
   PixelsPerInch = 96
   TextHeight = 13
+  object lbl_hint: TLabel
+    Left = 0
+    Top = 6
+    Width = 179
+    Height = 13
+    Caption = 'Enter the movie title and click search:'
+  end
   object txtSearch: TEdit
-    Left = 8
-    Top = 15
-    Width = 392
-    Height = 21
+    Left = 0
+    Top = 25
+    Width = 385
+    Height = 25
     TabOrder = 0
+    OnKeyUp = txtSearchKeyUp
   end
   object btnSearch: TButton
-    Left = 406
-    Top = 13
+    Left = 389
+    Top = 22
     Width = 75
     Height = 25
+    Cursor = crHandPoint
+    Anchors = []
     Caption = 'Search'
     TabOrder = 1
     OnClick = btnSearchClick
   end
   object lstMovies: TListBox
-    Left = 8
-    Top = 42
-    Width = 473
-    Height = 226
+    Left = 0
+    Top = 56
+    Width = 472
+    Height = 201
+    Align = alBottom
     ItemHeight = 13
     TabOrder = 2
     OnDblClick = lstMoviesDblClick
@@ -46,13 +62,13 @@ object frmSearch: TfrmSearch
     BaseURL = 'http://www.omdbapi.com/?apikey=497de05c'
     Params = <>
     Left = 351
-    Top = 219
+    Top = 203
   end
   object restRequest: TRESTRequest
     Client = restClient
     Params = <>
     SynchronizedEvents = False
-    Left = 423
-    Top = 219
+    Left = 415
+    Top = 203
   end
 end

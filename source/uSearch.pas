@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, REST.Types, REST.Client,
-  Data.Bind.Components, Data.Bind.ObjectScope, Json, System.Generics.Collections, uMovie, System.Generics.Defaults;
+  Data.Bind.Components, Data.Bind.ObjectScope, Json, System.Generics.Collections, uMovie, System.Generics.Defaults,
+  Vcl.ComCtrls;
 
 type
   TfrmSearch = class(TForm)
@@ -14,15 +15,16 @@ type
     lstMovies: TListBox;
     restClient: TRESTClient;
     restRequest: TRESTRequest;
+    lbl_hint: TLabel;
     procedure btnSearchClick(Sender: TObject);
     procedure lstMoviesDblClick(Sender: TObject);
+    procedure txtSearchKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
-    { Private declarations }
-    procedure findByTitle(title:string);
-    procedure findById(id:string);
-    var movies : TObjectList<TMovie>;
+    function findByTitle(title:string) : TObjectList<TMovie>;
+    function findById(id:string) : TMovie;
+    var ms : TObjectList<TMovie>;
   public
-    { Public declarations }
   end;
 
 var
@@ -34,78 +36,104 @@ implementation
 uses uMovieView;
 
 procedure TfrmSearch.btnSearchClick(Sender: TObject);
+var
+  m : TMovie;
 begin
-  lstMovies.Clear;
-  findByTitle(txtSearch.Text);
+  if txtSearch.Text <> '' then
+  begin
+    lstMovies.Clear;
+    ms := findByTitle(txtSearch.Text);
+    if ms <> nil then
+    begin
+      for m in ms do
+      begin
+        lstMovies.Items.Add(m.Title + ' | ' + m.Year);
+      end;
+      lstMovies.Enabled := true;
+    end
+    else
+    begin
+      lstMovies.Items.Add('No movies found.');
+      lstMovies.Enabled := false;
+    end;
+  end;
 end;
 
-procedure TfrmSearch.findById(id: string);
+function TfrmSearch.findById(id: string):TMovie;
 var
   m : TMovie;
 begin
   restRequest.ResetToDefaults;
   restRequest.AddParameter('i', id);
   restRequest.AddParameter('plot','full');
-  //ShowMessage(id);
   restRequest.Execute;
-  //ShowMessage(restRequest.Response.JSONValue.ToString);
   m := TMovie.FromJsonString(restRequest.Response.JSONValue.ToString);
-  frmMovieView := TfrmMovieView.Create(self);
-  frmMovieView.Setmovie(m);
-  frmMovieView.ShowModal;
+  result := m;
 end;
 
-procedure TfrmSearch.findByTitle(title: string);
+function TfrmSearch.findByTitle(title: string):TObjectList<TMovie>;
 var
   jObject : TJSONObject;
   jArray : TJSONArray;
-  jMovies : TJSONArray;
   Value: TJSONValue;
-  m : TMovie;
-  Comp : IComparer<TMovie>;
+  ms : TObjectList<TMovie>;
 begin
   restRequest.AddParameter('s', title);
-  //restRequest.AddParameter('type','episode');
   restRequest.Execute;
-
   jObject := TJSONObject.ParseJSONValue(TEncoding.ASCII.GetBytes(restRequest.Response.JSONValue.ToString), 0) as TJSONObject;
-  Value := jObject.Get('Search').JsonValue;
-  jArray:= Value as TJSONArray;
-
-  movies :=  TObjectList<TMovie>.Create;
-  for Value in jArray do
+  if jObject.ToString <> '{"Response":"False","Error":"Movie not found!"}' then
   begin
-    movies.Add(TMovie.FromJsonString(Value.ToString));
-  end;
-  //movies.Sort;
-  Comp := TComparer<TMovie>.Construct(
-    function (const L, R : TMovie) : integer
+    Value := jObject.Get('Search').JsonValue;
+    jArray:= Value as TJSONArray;
+    ms := TObjectList<TMovie>.Create;
+    for Value in jArray do
     begin
-      result := CompareStr(L.Year, R.Year);
-      if result = 0 then
-        result := CompareStr(l.Year, R.Year);
-    end
-  );
-  //TObjectList.sort (movies, Comp);
-  for m in movies do
+      ms.Add(TMovie.FromJsonString(Value.ToString));
+    end;
+    result := ms;
+  end
+  else
   begin
-    lstMovies.Items.Add(m.Title + ' | ' + m.Year);
+    result := nil;
   end;
 end;
 
 procedure TfrmSearch.lstMoviesDblClick(Sender: TObject);
-var mIndex : integer;
+var m : TMovie;
 begin
-  {mIndex := lstMovies.ItemIndex;
-  //ShowMessage(movies[lstMovies.ItemIndex].Year);
+  m := findById(ms[lstMovies.ItemIndex].imdbID);
   frmMovieView := TfrmMovieView.Create(self);
-  frmMovieView.Setmovie(movies[lstMovies.ItemIndex]);
-
+  frmMovieView.movie := TMovie.Create;
+  frmMovieView.Setmovie(m);
   frmMovieView.ShowModal;
+end;
 
-  //frmMovieView.movie := frmMovieView.movie.Create;
-  //frmMovieView.movie := movies[lstMovies.ItemIndex];}
-  findById(movies[lstMovies.ItemIndex].imdbID);
+procedure TfrmSearch.txtSearchKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+  var
+  m :TMovie;
+begin
+  if (ord(Key) = VK_RETURN) then
+  begin
+    if txtSearch.Text <> '' then
+  begin
+    lstMovies.Clear;
+    ms := findByTitle(txtSearch.Text);
+    if ms <> nil then
+    begin
+      for m in ms do
+      begin
+        lstMovies.Items.Add(m.Title + ' | ' + m.Year);
+      end;
+      lstMovies.Enabled := true;
+    end
+    else
+    begin
+      lstMovies.Items.Add('No movies found.');
+      lstMovies.Enabled := false;
+    end;
+  end;
+  end;
 end;
 
 end.

@@ -8,7 +8,8 @@ uses
   uMovie in 'source\uMovie.pas',
   uRating in 'source\uRating.pas',
   uMovieView in 'source\uMovieView.pas' {frmMovieView},
-  uSearch in 'source\uSearch.pas' {frmSearch};
+  uSearch in 'source\uSearch.pas' {frmSearch},
+  uFavorites in 'source\uFavorites.pas' {frmFavorites};
 
 {$R *.res}
 
@@ -17,6 +18,5 @@ begin
   Application.MainFormOnTaskbar := True;
   TStyleManager.TrySetStyle('Glow');
   Application.CreateForm(TfrmMain, frmMain);
-  Application.CreateForm(TfrmSearch, frmSearch);
   Application.Run;
 end.
