@@ -4,13 +4,13 @@ Project created as object of study of the Delphi language and understanding of i
 # Preview
 
 Main menu <br>
-![screeshot](https://imagizer.imageshack.com/img923/4153/4Ufmkk.jpg)
+![screenshot](https://imagizer.imageshack.com/img924/9212/CRLvt5.jpg)
 
-First layout to Search's page <br>
-![screeshot](https://imagizer.imageshack.com/img924/6162/nl8L8t.jpg)
+Search's page <br>
+![screenshot](https://imagizer.imageshack.com/img923/3781/i51PWI.jpg)
 
 Movie information's frameView <br>
-![screeshot](https://imagizer.imageshack.com/img921/4331/MAyhsB.jpg)
+![screenshot](https://imagizer.imageshack.com/img923/1848/If6qoS.jpg)
 
 # API
 Information provided by RESTFull OMDb API. [(Acess OMDb's page)](http://www.omdbapi.com)
